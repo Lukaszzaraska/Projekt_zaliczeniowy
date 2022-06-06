@@ -3,11 +3,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Projekt_zaliczeniowy" xmlns:i="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="1060">
 
-    <ListView Margin="10" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding ObservableCollectionCity}"></ListView> 
-        
+    <StackPanel>
+        <Grid x:Name="Mdgrd" Height="510">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="6*"></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+        <ContentControl Name="Main" Grid.Column="2" >
+               
+            </ContentControl>
+            <StackPanel Name="menu" Grid.Column="0">
+                <Button Click="Back" Margin="0 10 0 0"  Content="Wróć" Width="120" FontWeight="Bold" FontSize="14"></Button>
+            </StackPanel>
+        </Grid>
+       
+    </StackPanel>
+
+
+
 
 </Window>

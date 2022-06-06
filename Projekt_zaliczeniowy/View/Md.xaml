@@ -1,0 +1,69 @@
+﻿<Window x:Class="Projekt_zaliczeniowy.View.Md"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Md" Height="450" Width="800">
+    
+        <StackPanel>
+            <Grid x:Name="Mdgrd" Height="510">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+
+
+            </Grid.ColumnDefinitions>
+            <ContentControl Content="{Binding SelectedViewModel}"/>
+            <ListView Name="StacjeTable" Grid.Column="2">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="false"  ColumnHeaderToolTip="Stacja table">
+
+                        <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" Width="50"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding StationId}" Header="StationId" Width="60" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Param.ParamName}" Header="ParamName" Width="150"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Param.ParamFormula}" Header="ParamFormula" Width="80"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Param.ParamCode}" Header="ParamCode" Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Param.IdParam}" Header="IdParam" Width="50"/>
+                        <GridViewColumn Header="Measurement-data" Width="120">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Measurement data" Tag="{Binding Id}" Name="Measurement_data" Click="Md_Click" ></Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Air-quality-index" Width="110">
+
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Air quality index" Tag="{Binding StationId}"  Name="Air_quality_index" Click="Aqi_Click" Margin="5 0 0 0"></Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+
+                        </GridViewColumn>
+
+                    </GridView>
+
+                </ListView.View>
+            </ListView>
+
+            <StackPanel Name="menu" Grid.Column="0">
+                <Button Click="Back" Margin="0 10 0 0"  Content="Wróć" Width="120" FontWeight="Bold" FontSize="14"></Button>
+            </StackPanel>
+            <Border Name="city"  Grid.Column="1" BorderBrush="Gray" BorderThickness="1" >
+                <TextBlock  HorizontalAlignment="Center" Text="City" FontSize="14" ></TextBlock>
+            </Border>
+
+
+            
+            <ListView Name="city_list" Margin="0 20 0 0" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding ObservableCollectionCity}" Grid.Column="1" Grid.Row="0"></ListView>
+
+            <!--<ListView Margin="10" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding ObservableCollectionStation}" Grid.Column="1" Grid.Row="0"></ListView>-->
+
+        </Grid>
+    </StackPanel>
+   
+</Window>
