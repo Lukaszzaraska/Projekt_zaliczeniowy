@@ -65,6 +65,11 @@ namespace Projekt_zaliczeniowy
            
             return stanowiska_pomiarowe;
         }
+        /// <summary>
+        /// Zwraca indeks powietrza
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns>Jakosc_powietrza</returns>
         public static Jakosc_powietrza Air_Qualities(int Id)
         {
             WebClient client = new WebClient();
@@ -73,6 +78,11 @@ namespace Projekt_zaliczeniowy
 
             return Indeks_powietrza;
         }
+        /// <summary>
+        /// Zwraca dane pomiarowe
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns>Dane_pomiarowe</returns>
         public static Dane_pomiarowe Measurement_data(int Id)
         {
             WebClient client = new WebClient();
@@ -81,6 +91,10 @@ namespace Projekt_zaliczeniowy
 
             return Measurement;
         }
+        /// <summary>
+        /// Edytuje wygląd zależnie od wartości
+        /// </summary>
+        /// <param name="data"></param>
         public static void Color_Air(TextBlock data)
         {
             if(data.Text.Equals("Bardzo dobry"))

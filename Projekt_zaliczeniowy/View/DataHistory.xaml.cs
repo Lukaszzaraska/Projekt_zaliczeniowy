@@ -15,7 +15,6 @@ namespace Projekt_zaliczeniowy.View
         {
             InitializeComponent();
             DataContext = this;
-            var test = HistoryRepository.GetHistory();
             DataHistoryTable.ItemsSource = HistoryRepository.GetHistory();
         }
     }
