@@ -52,16 +52,7 @@ namespace Projekt_zaliczeniowy
             }
         }
 
-       /* private ObservableCollection<string> observableCollectionStation;
-        public ObservableCollection<string> ObservableCollectionStation
-        {
-            get { return observableCollectionStation; }
-            set
-            {
-                observableCollectionStation = value;
-                Onpropertychanged(nameof(ObservableCollectionStation));
-            }*/
-        //}
+    
         public ViewDefault()
         {
             InitializeComponent();
@@ -90,7 +81,7 @@ namespace Projekt_zaliczeniowy
         {
             var Button = sender as Button;
             var data = Button.Tag;
-           // Content = new Md(int.Parse(data.ToString()));
+            Content = new Md(int.Parse(data.ToString()));
         }
     }
 }

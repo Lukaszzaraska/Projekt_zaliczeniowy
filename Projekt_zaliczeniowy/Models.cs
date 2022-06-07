@@ -112,5 +112,23 @@ namespace Projekt_zaliczeniowy
             [JsonPropertyName("indexLevelName")]
             public string? IndexLevelName { get; set; } = "Empty";
         }
+        //-------------------------------------------------------------------------------------
+        public class Dane_pomiarowe
+        {
+            [JsonPropertyName("key")]
+            public string? Key { get; set; }
+
+            [JsonPropertyName("values")]
+            public Values[]? Values { get; set; }
+
+        }
+        public class Values
+        {
+            [JsonPropertyName("date")]
+            public string? Date { get; set; }
+
+            [JsonPropertyName("value")]
+            public double? Value { get; set; }
+        }
     }
 }

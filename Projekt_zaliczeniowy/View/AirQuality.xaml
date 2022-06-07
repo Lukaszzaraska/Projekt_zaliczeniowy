@@ -6,8 +6,9 @@
         mc:Ignorable="d"
          d:Height="450" d:Width="800">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
+        <Grid>
+        
+            <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -20,30 +21,33 @@
             <RowDefinition Height="50"></RowDefinition>
 
         </Grid.RowDefinitions>
+        
         <StackPanel  Grid.Row="0" Grid.Column="2">
-            <TextBlock  TextAlignment="Center"  FontSize="20" Text="Id Sensor" ></TextBlock>
-            <TextBlock  TextAlignment="Center" FontSize="20"  x:Name="Id_Air" ></TextBlock>
+            <TextBlock  TextAlignment="Center" Background="Bisque" FontSize="20" Text="Id Sensor" ></TextBlock>
+            <TextBlock  TextAlignment="Center" Background="AntiqueWhite" FontSize="20" Margin="0 5 0 0"  x:Name="Id_Air" ></TextBlock>
         </StackPanel>
-        <StackPanel>
-            <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20" Margin="10 0 0 0"  Text="StCalcDate"></TextBlock>
-            <TextBlock Grid.Row="2" Grid.Column="0" FontSize="20" Margin="10 0 0 0" x:Name="StCalcDate" ></TextBlock>
+        <StackPanel  Grid.ColumnSpan="2">
+            
+            <TextBlock Grid.Row="1" Grid.Column="0" Background="Bisque" FontSize="20" Margin="5 5 150 0"  Text="StCalcDate"></TextBlock>
+            <TextBlock Grid.Row="2"  Background="AntiqueWhite" FontSize="20" Margin="5 5 150 0" x:Name="StCalcDate" ></TextBlock>
         </StackPanel>
 
 
-        <TextBlock Grid.Row="1" Grid.Column="0" TextAlignment="Center" FontSize="20" Text="so2IndexLevel"></TextBlock>
-        <TextBlock Background="Gray" Grid.Row="2" Grid.Column="0" TextAlignment="Center" FontSize="20" x:Name="so2" ></TextBlock>
+        <TextBlock Background="Bisque"  Grid.Row="1" Grid.Column="0" TextAlignment="Center" FontSize="20" Margin="2 2 2 2" Text="so2IndexLevel"></TextBlock>
+        <TextBlock  Grid.Row="2" Grid.Column="0" TextAlignment="Center" FontSize="20" Margin="2 2 2 2" x:Name="so2" ></TextBlock>
 
-        <TextBlock Grid.Row="1" Grid.Column="1" TextAlignment="Center" FontSize="20" Text="no2IndexLevel"></TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="1" TextAlignment="Center" FontSize="20" x:Name="no2" ></TextBlock>
+        <TextBlock  Background="Bisque" Grid.Row="1" Grid.Column="1" TextAlignment="Center" FontSize="20" Margin="2 2 2 2" Text="no2IndexLevel"></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="1" TextAlignment="Center" FontSize="20" Margin="2 2 2 2" x:Name="no2" ></TextBlock>
 
-        <TextBlock Grid.Row="1" Grid.Column="2" TextAlignment="Center" FontSize="20" Text="pm10IndexLevel"></TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="2" TextAlignment="Center" FontSize="20" x:Name="pm10" ></TextBlock>
+        <TextBlock  Background="Bisque"  Grid.Row="1" Grid.Column="2" TextAlignment="Center" FontSize="20" Margin="2 2 2 2" Text="pm10IndexLevel"></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="2" TextAlignment="Center" FontSize="20" Margin="2 2 2 2" x:Name="pm10" ></TextBlock>
 
-        <TextBlock Grid.Row="1" Grid.Column="3" TextAlignment="Center" FontSize="20" Text="pm25IndexLevel"></TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="3" TextAlignment="Center" FontSize="20" x:Name="pm25" ></TextBlock>
+        <TextBlock Background="Bisque" Grid.Row="1" Grid.Column="3" TextAlignment="Center" FontSize="20" Margin="2 2 2 2" Text="pm25IndexLevel"></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="3" TextAlignment="Center" FontSize="20" Margin="2 2 2 2" x:Name="pm25" ></TextBlock>
 
-        <TextBlock Grid.Row="1" Grid.Column="4" TextAlignment="Center" FontSize="20" Text="o3IndexLevel"></TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="4" TextAlignment="Center" FontSize="20" x:Name="o3" ></TextBlock>
+        <TextBlock Background="Bisque"  Grid.Row="1" Grid.Column="4" TextAlignment="Center" FontSize="20" Margin="2 2 2 2" Text="o3IndexLevel"></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="4" TextAlignment="Center" FontSize="20" Margin="2 2 2 2" x:Name="o3" ></TextBlock>
+       
     </Grid>
            
  
