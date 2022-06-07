@@ -10,14 +10,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static Projekt_zaliczeniowy.Models;
+using static Projekt_zaliczeniowy.Models_api;
 using static Projekt_zaliczeniowy.ApiControl;
+using Projekt_zaliczeniowy.Models;
+using Projekt_zaliczeniowy.Services;
 
 namespace Projekt_zaliczeniowy
 {
@@ -36,7 +32,7 @@ namespace Projekt_zaliczeniowy
 
                 selectedItem = value;
                 StacjeTable.ItemsSource = Stacje(selectedItem);
-             
+                StacjeTable.ToolTip = Miasta_info(selectedItem).StationName;
                 Onpropertychanged(nameof(SelectedItem));
                 // MessageBox.Show(SelectedItem);
             }
@@ -56,8 +52,9 @@ namespace Projekt_zaliczeniowy
         public ViewDefault()
         {
             InitializeComponent();
-            DataContext = this;
             ObservableCollectionCity = new ObservableCollection<string>(Miasta());
+            DataContext = this;
+           
             
         }
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -67,7 +64,7 @@ namespace Projekt_zaliczeniowy
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
    
-        private void Aqi_Click(object sender, RoutedEventArgs e)//air quality inedx
+        private void Aqi_Click(object sender, RoutedEventArgs e)
         {
 
 
@@ -77,11 +74,95 @@ namespace Projekt_zaliczeniowy
 
         }
 
-        private void Md_Click(object sender, RoutedEventArgs e)//air quality inedx
+        private void Md_Click(object sender, RoutedEventArgs e)
         {
             var Button = sender as Button;
             var data = Button.Tag;
+            var result = Measurement_data(int.Parse(data.ToString())) ;
+            var hm = result.Values;
+            Dane_pomiarowe history = new()
+            {
+                DateTime = DateTime.Now,
+                Key = result.Key,
+                IValues = result.Values,
+            };
+
+            HistoryRepository.AddHistory(history);
             Content = new Md(int.Parse(data.ToString()));
+            
+        }
+
+
+        GridViewColumnHeader _lastHeaderClicked;
+        ListSortDirection _lastDirection = ListSortDirection.Ascending;
+
+        void GridViewColumnHeaderClickedHandler(object sender,
+                                                RoutedEventArgs e)
+        {
+            var headerClicked = e.OriginalSource as GridViewColumnHeader;
+            ListSortDirection direction;
+
+            if (headerClicked != null)
+            {
+                if (headerClicked.Role != GridViewColumnHeaderRole.Padding)
+                {
+                    if (headerClicked != _lastHeaderClicked)
+                    {
+                        direction = ListSortDirection.Ascending;
+                    }
+                    else
+                    {
+                        if (_lastDirection == ListSortDirection.Ascending)
+                        {
+                            direction = ListSortDirection.Descending;
+                        }
+                        else
+                        {
+                            direction = ListSortDirection.Ascending;
+                        }
+                    }
+
+                    var columnBinding = headerClicked.Column.DisplayMemberBinding as Binding;
+                    var sortBy = columnBinding?.Path.Path ?? headerClicked.Column.Header as string;
+
+                    Sort(sortBy, direction);
+
+                    if (direction == ListSortDirection.Ascending)
+                    {
+                        headerClicked.Column.HeaderTemplate =
+                          Resources["HeaderTemplateArrowUp"] as DataTemplate;
+                    }
+                    else
+                    {
+                        headerClicked.Column.HeaderTemplate =
+                          Resources["HeaderTemplateArrowDown"] as DataTemplate;
+                    }
+
+                    // Remove arrow from previously sorted header
+                    if (_lastHeaderClicked != null && _lastHeaderClicked != headerClicked)
+                    {
+                        _lastHeaderClicked.Column.HeaderTemplate = null;
+                    }
+
+                    _lastHeaderClicked = headerClicked;
+                    _lastDirection = direction;
+                }
+            }
+        }
+        private void Sort(string sortBy, ListSortDirection direction)
+        {
+            ICollectionView dataView =
+            CollectionViewSource.GetDefaultView(StacjeTable.ItemsSource);
+            if (dataView != null)
+            {
+                dataView.SortDescriptions.Clear();
+                SortDescription sd = new SortDescription(sortBy, direction);
+                dataView.SortDescriptions.Add(sd);
+                dataView.Refresh();
+            }
+          
         }
     }
+
 }
+

@@ -1,7 +1,7 @@
 ﻿
 using System.Windows;
 using System.Windows.Controls;
-using static Projekt_zaliczeniowy.Models;
+using static Projekt_zaliczeniowy.Models_api;
 using static Projekt_zaliczeniowy.ApiControl;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -24,10 +24,14 @@ namespace Projekt_zaliczeniowy
             Main.Content = new ViewDefault();
             
         }
-        private void Back(object sender, RoutedEventArgs e)//air quality inedx
+        private void Back(object sender, RoutedEventArgs e)
         {
             Main.Content = new ViewDefault();
         }
 
+        private void History_Display(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new DataHistory();
+        }
     }
 }

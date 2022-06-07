@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:projekt_zaliczeniowy="clr-namespace:Projekt_zaliczeniowy" d:DataContext="{d:DesignInstance Type=projekt_zaliczeniowy:ViewDefault}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -12,7 +12,7 @@
         </Grid.ColumnDefinitions>
 
 
-        <ListView Name="StacjeTable" Grid.Column="1">
+        <ListView Name="StacjeTable" GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler" Grid.Column="1">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Background" Value="AliceBlue" />
@@ -39,8 +39,16 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Param.IdParam}" Header="IdParam" Width="50"/>
                     <GridViewColumn Header="Measurement-data" Width="120">
                         <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Measurement data" Tag="{Binding Id}" Name="Measurement_data" Click="Md_Click" ></Button>
+                            <DataTemplate >
+                                <Button Content="Measurement data" Tag="{Binding Id}"  Name="Measurement_data" Click="Md_Click" Margin="0 4 0 4" >
+
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </Button.Resources>
+
+                                </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
 
@@ -50,7 +58,13 @@
 
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Air quality index" Tag="{Binding StationId}"  Name="Air_quality_index" Click="Aqi_Click" Margin="5 0 0 0"></Button>
+                                <Button Content="Air quality index" Tag="{Binding StationId}"  Name="Air_quality_index" Click="Aqi_Click" Margin="5 4 0 4">
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
 
@@ -62,14 +76,32 @@
         </ListView>
 
 
-        <Border Name="city"  Grid.Column="0" BorderBrush="Gray" BorderThickness="1" >
-            <TextBlock  HorizontalAlignment="Center" Text="City" FontSize="14" ></TextBlock>
+        <Border Name="city"  Grid.Column="0" BorderBrush="Gray" Background="White" BorderThickness="1" >
+            <TextBlock  HorizontalAlignment="Center" Text="City" FontSize="15" ></TextBlock>
         </Border>
 
 
-
-        <ListView Name="city_list" Margin="0 20 0 0" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding ObservableCollectionCity}" Grid.Column="0" Grid.Row="0"></ListView>
-
+       
+            <ListView Name="city_list" Margin="0 20 0 0" SelectedItem="{Binding SelectedItem}"  ItemsSource="{Binding ObservableCollectionCity}" Grid.Column="0" Grid.Row="0">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="AliceBlue" />
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="Width" Value="148"></Setter>
+                    <Setter Property="Margin" Value="0 2 0 0"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="Purple" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+ 
+       
+     
         <!--<ListView Margin="10" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding ObservableCollectionStation}" Grid.Column="1" Grid.Row="0"></ListView>-->
 
 

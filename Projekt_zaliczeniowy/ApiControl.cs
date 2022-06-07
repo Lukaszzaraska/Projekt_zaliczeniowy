@@ -7,14 +7,17 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
-using static Projekt_zaliczeniowy.Models;
+using static Projekt_zaliczeniowy.Models_api;
 
 namespace Projekt_zaliczeniowy
 {
     internal class ApiControl
     {
-     
-            public static IList<string> Miasta()
+        /// <summary>
+        ///    Podaje nazwy miast
+        /// </summary>
+        /// <returns>IList<string></returns>
+        public static IList<string> Miasta()
             {
                 WebClient client = new WebClient();
                 string json = client.DownloadString("https://api.gios.gov.pl/pjp-api/rest/station/findAll");
@@ -29,6 +32,25 @@ namespace Projekt_zaliczeniowy
 
             return lista_miasta;
             }
+        /// <summary>
+        ///     Zwraca cały obiekt z stacji pomiarowej
+        /// </summary>
+        /// <param name="city"> nazwa miasta do wyszukania</param>
+        /// <returns>Stacja_Pomiarowa</returns>
+        public static Stacja_Pomiarowa Miasta_info(string city)
+        {
+            WebClient client = new WebClient();
+            string json = client.DownloadString("https://api.gios.gov.pl/pjp-api/rest/station/findAll");
+            var miasta = JsonSerializer.Deserialize<IList<Stacja_Pomiarowa>>(json);
+            var miasto = miasta.First(x => x.City.Name == city);
+
+            return miasto;
+        }
+        /// <summary>
+        ///   Zwraca stanowiska pomiarowe
+        /// </summary>
+        /// <param name="city"></param>
+        /// <returns>IList<Stanowisko_Pomiarowe></returns>
         public static IList<Stanowisko_Pomiarowe> Stacje(string city)
         {
             WebClient client = new WebClient();

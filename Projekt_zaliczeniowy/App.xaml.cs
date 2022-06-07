@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projekt_zaliczeniowy.Data;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,17 @@ namespace Projekt_zaliczeniowy
     /// </summary>
     public partial class App : Application
     {
+        public static DataContext dbContext = new();
+
+        private async void Application_Startup(object sender, StartupEventArgs e)
+        {
+            await dbContext.Database.EnsureDeletedAsync();
+            await dbContext.Database.EnsureCreatedAsync();
+            await dbContext.SaveChangesAsync();
+
+            MainWindow main = new();
+            main.Show();
+
+        }
     }
 }

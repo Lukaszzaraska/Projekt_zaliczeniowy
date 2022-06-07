@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using static Projekt_zaliczeniowy.Models;
+using static Projekt_zaliczeniowy.Models_api;
 using static Projekt_zaliczeniowy.ApiControl;
 
 

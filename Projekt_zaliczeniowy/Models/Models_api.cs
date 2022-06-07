@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+
 
 namespace Projekt_zaliczeniowy
 {
-    internal class Models
+    public class Models_api
     {
        public class Stacja_Pomiarowa
         {
@@ -113,22 +114,30 @@ namespace Projekt_zaliczeniowy
             public string? IndexLevelName { get; set; } = "Empty";
         }
         //-------------------------------------------------------------------------------------
-        public class Dane_pomiarowe
+        public class Dane_pomiarowe 
         {
+            [Key]
+            public DateTime? DateTime { get; set; }
+            
             [JsonPropertyName("key")]
             public string? Key { get; set; }
 
             [JsonPropertyName("values")]
+            [NotMapped]
             public Values[]? Values { get; set; }
 
+            public ICollection<Values>? IValues { get; set; }
         }
         public class Values
         {
+            [Key]
+            public int Id { get; set; }
             [JsonPropertyName("date")]
             public string? Date { get; set; }
 
             [JsonPropertyName("value")]
             public double? Value { get; set; }
         }
+
     }
 }

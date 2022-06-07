@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="Projekt_zaliczeniowy.View.Md"
+﻿<UserControl x:Class="Projekt_zaliczeniowy.View.DataHistory"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:projekt_zaliczeniowy="clr-namespace:Projekt_zaliczeniowy" d:DataContext="{d:DesignInstance Type=projekt_zaliczeniowy:ViewDefault}"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:projekt_zaliczeniowy="clr-namespace:Projekt_zaliczeniowy" d:DataContext="{d:DesignInstance Type=projekt_zaliczeniowy:ViewDefault}"
              mc:Ignorable="d"
-         Height="450" Width="800" >
+         Height="450" Width="800">
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -20,17 +20,14 @@
 
         </Grid.RowDefinitions>
 
-        <StackPanel  Grid.Row="0" Grid.Column="0">
-            <TextBlock  TextAlignment="Center" Background="Bisque" FontSize="20" Text="Key" Width="auto" ></TextBlock>
-            <TextBlock  TextAlignment="Center" Background="AntiqueWhite" FontSize="20" Margin="0 5 0 0" Width="auto" x:Name="Key" ></TextBlock>
-        </StackPanel>
-
-        <ListView Name="DanePomiaroweTable" GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler"  Grid.ColumnSpan="5" Grid.Row="1">
+        <ListView Name="DataHistoryTable"  Grid.ColumnSpan="5" Grid.RowSpan="2">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Background" Value="AliceBlue" />
                     <Setter Property="BorderBrush" Value="Black" />
                     <Setter Property="BorderThickness" Value="1" />
+                    
+
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Foreground" Value="Red" />
@@ -38,17 +35,18 @@
                     </Style.Triggers>
                 </Style>
             </ListView.ItemContainerStyle>
-            
             <ListView.View>
-                <GridView AllowsColumnReorder="false" ColumnHeaderToolTip="Dane pomiarowe table">
 
-                    <GridViewColumn DisplayMemberBinding="{Binding Date}"  Header="Date" Width="150" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Value" Width="120" />
+                <GridView AllowsColumnReorder="false"  ColumnHeaderToolTip="History table">
 
+                    <GridViewColumn DisplayMemberBinding="{Binding DateTime}" Header="DateTime" Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Key" Width="110"/>
+         
                 </GridView>
 
             </ListView.View>
         </ListView>
+
 
 
     </Grid>
